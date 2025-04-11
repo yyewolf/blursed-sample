@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "npm-golang": "^0.4.0"
+  },
+  "scripts": {
+    "install": "npm-golang -V 1.24.2 install",
+    "build": "npm-golang go build",
+    "serve": "./blursed-sample"
+  }
+}
