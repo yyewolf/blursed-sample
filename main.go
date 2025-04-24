@@ -1,6 +1,10 @@
 package main
 
-import "github.com/go-fuego/fuego"
+import (
+	"strconv"
+
+	"github.com/go-fuego/fuego"
+)
 
 func main() {
 	s := fuego.NewServer()
@@ -8,6 +12,18 @@ func main() {
 
 	fuego.Get(s, "/", func(c fuego.ContextNoBody) (string, error) {
 		return "Hello, World!", nil
+	})
+
+	fuego.Get(s, "/{code}", func(c fuego.ContextNoBody) (string, error) {
+		code := c.PathParam("code")
+		statusCode, err := strconv.Atoi(code)
+		if err != nil {
+			statusCode = 200
+		}
+
+		c.SetStatus(statusCode)
+
+		return "Wowie, got: " + code, nil
 	})
 
 	s.Run()
